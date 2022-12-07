@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['base_url'] = 'http://localhost/ordem/';
+$config['base_url'] = 'http://localhost/sistema-de-venda-codeIgniter/';
 
 $config['index_page'] = 'index.php';
 

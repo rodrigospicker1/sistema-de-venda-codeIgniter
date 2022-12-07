@@ -1,7 +1,4 @@
 <?php $this->load->view('layout/sidebar') ?>
-
-        
-
         
             <!-- Main Content -->
             <div id="content">

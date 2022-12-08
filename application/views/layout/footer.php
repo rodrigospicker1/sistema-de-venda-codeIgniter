@@ -49,6 +49,12 @@
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('public/js/sb-admin-2.min.js') ?>"></script>
 
+    <?php if(isset($scripts)){ ?>
+        <?php foreach($scripts as $script){ ?>
+            <script src="<?= base_url('public/'.$script); ?>"></script>
+        <?php } ?>
+    <?php } ?>
+
 </body>
 
 </html>

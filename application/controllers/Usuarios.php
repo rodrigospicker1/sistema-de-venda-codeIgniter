@@ -10,7 +10,16 @@ class Usuarios extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-			'usuarios' => $this->db->get("users")->result();
+			'styles' => array(
+				'vendor/datables/dataTables.bootstrap4.min.css'
+			),
+			'scripts' => array(
+				'vendor/datatables/jquery.dataTables.min.js',
+				'vendor/datatables/dataTables.bootstrap4.min.js',
+				'vendor/datatables/app.js'
+			),
+
+			'usuarios' => $this->db->get("users")->result()
 		);
 
 		$this->load->view('layout/header', $data);

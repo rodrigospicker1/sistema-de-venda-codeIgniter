@@ -31,15 +31,24 @@ class Usuarios extends CI_Controller {
 		$this->load->view('layout/footer');
 	}
 
-	public function edit($user_id = NULL){
+	public function edit($usuario_id = NULL){
+
+		$db1 = $this->db;
+		$db2 = $this->db;
 
 		$this->db->select('*');
         $this->db->from('users');
-        $this->db->where('users.id = '.$user_id.'');
+        $this->db->where('users.id = '.$usuario_id.'');
 
-		$query = $this->db->get();
+		$query1 = $this->db->get();
 
-		if(!$user_id || !$query->row_array()){
+		$db1->select('*');
+        $db1->from('users_groups');
+        $db1->where('users_groups.user_id = '.$usuario_id.'');
+
+        $query2 = $db1->get();
+
+		if(!$usuario_id || !$query1->row_array()){
 
 			exit('Usuário não encontrado');
 
@@ -47,7 +56,8 @@ class Usuarios extends CI_Controller {
 
 			$data = array(
 				'titulo' => 'Editar usuário',
-				'usuario' => $query->row_array()
+				'usuario' => $query1->row_array(),
+				'perfil_usuario' => $query2->row_array()
 			); 
 
 			$this->load->view('layout/header', $data);

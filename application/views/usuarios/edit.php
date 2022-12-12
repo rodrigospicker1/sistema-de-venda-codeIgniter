@@ -25,7 +25,8 @@
                         </div>
                         <div class="card-body">
 
-                            <form>
+                            <form method="post" name="form_edit">
+
                               <div class="form-group row">
                                     
                                 <div class="col-md-4">
@@ -45,6 +46,11 @@
 
                               </div>
                               <div class="form-group row">
+
+                                <div class="col-md-4">
+                                    <label>Usuário</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Seu usuário" value="<?= $usuario['username'] ?>">
+                                </div>
                                     
                                 <div class="col-md-4">
                                     <label>Ativo</label>
@@ -62,16 +68,26 @@
                                     </select>
                                 </div>
 
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                              </div>
-                              <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-md-6">
+                                      <label>Senha</label>
+                                      <input type="password" class="form-control" id="password" placeholder="Sua senha">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                      <label>Confirme sua senha</label>
+                                      <input type="password" class="form-control" id="confirm_password" placeholder="Confirme sua senha">
+                                    </div>
+
+                                    <input type="hidden" name="usuario_id" value="<?php echo $usuario['id'] ?>">
+
+                                </div>
+
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+
                             </form>
 
                         </div>

@@ -59,7 +59,7 @@ class Usuarios extends CI_Controller {
 			$this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|callback_email_check');
 			$this->form_validation->set_rules('username', 'username', 'trim|required|callback_username_check');
 			$this->form_validation->set_rules('password', 'password', 'min_length[5]|max_length[255]');
-			$this->form_validation->set_rules('confirm_password', 'confirm password', 'matches[password]');
+			$this->form_validation->set_rules('confirm_password', 'confirm password', 'required|matches[password]');
 
 			if($this->form_validation->run()){
 
@@ -77,6 +77,17 @@ class Usuarios extends CI_Controller {
 				);
 
 				$data = $this->security->xss_clean($data);
+
+				$password = $this->input->post('password');
+
+				if(!$password){
+					unset($data['password']);
+				}
+
+				if($this->core_model->update('users', $data, array('id' => $usuario_id))){
+					$perfil_usuario_db = $query2->row_array();
+					$perfil_usuario_post = $this->input->post('perfil_usuario');
+				}
 
 				echo '<pre>';
 				print_r($data);
@@ -103,8 +114,7 @@ class Usuarios extends CI_Controller {
 
 		$usuario_id = $this->input->post('usuario_id');
 
-		if($this->core_model->gete_by_id('users', array('email' => $email, 'id !=' => $usuario_id))){
-
+		if($this->core_model->get_by_id('users', array('email' => $email, 'id !=' => $usuario_id))){
 
 			$this->form_validation->set_message('email_check', 'Esse e-mail já existe');
 
@@ -122,7 +132,7 @@ class Usuarios extends CI_Controller {
 
 		$usuario_id = $this->input->post('usuario_id');
 
-		if($this->core_model->gete_by_id('users', array('username' => $username, 'id !=' => $usuario_id))){
+		if($this->core_model->get_by_id('users', array('username' => $username, 'id !=' => $usuario_id))){
 
 
 			$this->form_validation->set_message('username_check', 'Esse usuário já existe');

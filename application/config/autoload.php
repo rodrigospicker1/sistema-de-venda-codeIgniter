@@ -13,4 +13,4 @@ $autoload['config'] = array();
 
 $autoload['language'] = array();
 
-$autoload['model'] = array('Core_model');
+$autoload['model'] = array('core_model');

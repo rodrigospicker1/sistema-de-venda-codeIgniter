@@ -67,8 +67,8 @@
                                 <div class="col-md-4">
                                     <label>Perdil de acesso</label>
                                     <select type="text" class="form-control" name="perfil_usuario">
-                                        <option value="0" <?php echo ($perfil_usuario['group_id'] == 1) ? 'selected' : '' ?>>Administrador</option>
-                                        <option value="1" <?php echo ($perfil_usuario['group_id'] == 2) ? 'selected' : '' ?>>Vendedor</option>
+                                        <option value="1" <?php echo ($perfil_usuario['group_id'] == 1) ? 'selected' : '' ?>>Administrador</option>
+                                        <option value="2" <?php echo ($perfil_usuario['group_id'] == 2) ? 'selected' : '' ?>>Vendedor</option>
                                     </select>
                                 </div>
 
@@ -78,13 +78,13 @@
 
                                     <div class="col-md-6">
                                       <label>Senha</label>
-                                      <input type="password" class="form-control" id="password" placeholder="Sua senha">
-                                      <?= form_error('password', '<small  class="form-text text-danger">', '</small>') ?>
+                                      <input type="password" class="form-control" name="password" id="password" placeholder="Sua senha">
+                                      <?= form_error('password', '<small class="form-text text-danger">', '</small>') ?>
                                     </div>
 
                                     <div class="col-md-6">
                                       <label>Confirme sua senha</label>
-                                      <input type="password" class="form-control" id="confirm_password" placeholder="Confirme sua senha">
+                                      <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirme sua senha">
                                       <?= form_error('confirm_password', '<small  class="form-text text-danger">', '</small>') ?>
                                     </div>
 

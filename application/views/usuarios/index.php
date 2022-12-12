@@ -1,12 +1,9 @@
-<?php $this->load->view('layout/sidebar') ?>
-
-        
-
+<?php $this->load->view('layout/sidebar'); ?>
         
             <!-- Main Content -->
             <div id="content">
 
-               <?php $this->load->view('layout/navbar') ?>
+               <?php $this->load->view('layout/navbar'); ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -53,10 +50,10 @@
                                     <tbody>
                                         <?php foreach($usuarios as $user){ ?>
                                         <tr>
-                                            <td><?= $user->id ?></td>
-                                            <td><?= $user->username ?></td>
-                                            <td><?= $user->email ?></td>
-                                            <td><?= $user->active ?></td>
+                                            <td><?= $user['id']; ?></td>
+                                            <td><?= $user['username']; ?></td>
+                                            <td><?= $user['email']; ?></td>
+                                            <td><?= $user['active']; ?></td>
                                             <td>
                                                 <a title="Editar" href="<?= base_url('usuarios/edit/'.$user->id) ?>" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                                                 <a title="Excluir" href="" class="btn btn-sm btn-danger"><i class="fas fa-user-times"></i></a>

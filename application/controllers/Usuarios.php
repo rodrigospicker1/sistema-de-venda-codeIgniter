@@ -63,8 +63,24 @@ class Usuarios extends CI_Controller {
 
 			if($this->form_validation->run()){
 
-				$this->session->set_flashdata('error', 'Usuário não encontrado');
-				redirect('usuarios');
+				$data = elements(
+
+					array(
+						'first_name',
+						'last_name',
+						'email',
+						'username',
+						'active',
+						'password'
+					), $this->input->post()
+
+				);
+
+				$data = $this->security->xss_clean($data);
+
+				echo '<pre>';
+				print_r($data);
+				exit();
 
 			}else{
 

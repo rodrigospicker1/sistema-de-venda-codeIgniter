@@ -24,7 +24,7 @@ class Core_model extends CI_Model{
 		if($tabela && is_array($condicao)){
 			
 			$this->db->where($condicao);
-			$this-<db->limit(1);
+			$this->db->limit(1);
 
 			return $this->db->get($tabela)->row();
 
@@ -83,6 +83,8 @@ class Core_model extends CI_Model{
 					if($code == 1451){
 
 						$this->session->set_flashdata('error', 'Esse registro não poderá ser excluído, pois esta sendo utilizado em outra tabela');
+
+					}else{
 
 					}
 

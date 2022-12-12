@@ -32,16 +32,19 @@
                                 <div class="col-md-4">
                                     <label>Nome</label>
                                     <input type="text" class="form-control" name="first_name" placeholder="Seu nome" value="<?= $usuario['first_name'] ?>">
+                                    <?= form_error('first_name', '<small  class="form-text text-danger">', '</small>') ?>
                                 </div>
                                     
                                 <div class="col-md-4">
                                     <label>Sobrenome</label>
                                     <input type="text" class="form-control" name="last_name" placeholder="Seu sobrenome" value="<?= $usuario['last_name'] ?>">
+                                    <?= form_error('last_name', '<small  class="form-text text-danger">', '</small>') ?>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label>E-mail</label>
                                     <input type="text" class="form-control" name="email" placeholder="Seu email" value="<?= $usuario['email'] ?>">
+                                    <?= form_error('email', '<small  class="form-text text-danger">', '</small>') ?>
                                 </div>
 
                               </div>
@@ -50,6 +53,7 @@
                                 <div class="col-md-4">
                                     <label>Usuário</label>
                                     <input type="text" class="form-control" name="username" placeholder="Seu usuário" value="<?= $usuario['username'] ?>">
+                                    <?= form_error('username', '<small  class="form-text text-danger">', '</small>') ?>
                                 </div>
                                     
                                 <div class="col-md-4">
@@ -75,18 +79,20 @@
                                     <div class="col-md-6">
                                       <label>Senha</label>
                                       <input type="password" class="form-control" id="password" placeholder="Sua senha">
+                                      <?= form_error('password', '<small  class="form-text text-danger">', '</small>') ?>
                                     </div>
 
                                     <div class="col-md-6">
                                       <label>Confirme sua senha</label>
                                       <input type="password" class="form-control" id="confirm_password" placeholder="Confirme sua senha">
+                                      <?= form_error('confirm_password', '<small  class="form-text text-danger">', '</small>') ?>
                                     </div>
 
                                     <input type="hidden" name="usuario_id" value="<?php echo $usuario['id'] ?>">
 
                                 </div>
 
-                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Enviar</button>
 
                             </form>
 

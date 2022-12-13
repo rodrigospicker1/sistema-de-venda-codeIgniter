@@ -59,7 +59,7 @@ class Usuarios extends CI_Controller {
 			$this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|callback_email_check');
 			$this->form_validation->set_rules('username', 'username', 'trim|required|callback_username_check');
 			$this->form_validation->set_rules('password', 'password', 'min_length[5]|max_length[255]');
-			$this->form_validation->set_rules('confirm_password', 'confirm password', 'required|matches[password]');
+			$this->form_validation->set_rules('confirm_password', 'confirm password', 'matches[password]');
 
 			if($this->form_validation->run()){
 
@@ -84,14 +84,16 @@ class Usuarios extends CI_Controller {
 					unset($data['password']);
 				}
 
-				if($this->core_model->update('users', $data, array('id' => $usuario_id))){
-					$perfil_usuario_db = $query2->row_array();
-					$perfil_usuario_post = $this->input->post('perfil_usuario');
-				}
+				$this->core_model->update('users', $data, array('id' => $usuario_id));
 
-				echo '<pre>';
-				print_r($data);
-				exit();
+				$perfil_usuario_db = $query2->row_array();
+				$perfil_usuario_post = $this->input->post('perfil_usuario');
+
+				if($perfil_usuario_post != $perfil_usuario_db['id']){
+					$perfil_usuario_post = $usuario_id;
+				}
+				$this->session->set_flashdata('sucesso', 'Dados salvos com sucesso');
+				redirect('usuarios');
 
 			}else{
 

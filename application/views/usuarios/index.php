@@ -36,7 +36,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <a title="Cadastrar novo usuário" href="" class="btn btn-sm btn-success float-right"><i class="fas fa-user-plus"></i>&nbsp; Novo </a>
+                            <a title="Cadastrar novo usuário" href="<?php echo base_url('usuarios/add'); ?>" class="btn btn-sm btn-success float-right"><i class="fas fa-user-plus"></i>&nbsp; Novo </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -46,7 +46,7 @@
                                             <th>#</th>
                                             <th>Usuário</th>
                                             <th>Login</th>
-                                            <th>Ativo</th>
+                                            <th class="text-center">Ativo</th>
                                             <th class="no-sort" >Ações</th>
                                         </tr>
                                     </thead>
@@ -56,7 +56,7 @@
                                             <td><?= $user->id ?></td>
                                             <td><?= $user->username ?></td>
                                             <td><?= $user->email ?></td>
-                                            <td><?= $user->active ?></td>
+                                            <td class="text-center"><?php if($user->active == 1){echo('<span class="badge-primary btn-sm">Sim</span>');}else{echo('<span class="badge-primary btn-sm">Não</span>');} ?></td>
                                             <td>
                                                 <a title="Editar" href="<?= base_url('usuarios/edit/'.$user->id) ?>" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                                                 <a title="Excluir" href="" class="btn btn-sm btn-danger"><i class="fas fa-user-times"></i></a>

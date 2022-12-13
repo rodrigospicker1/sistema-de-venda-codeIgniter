@@ -31,6 +31,52 @@ class Usuarios extends CI_Controller {
 		$this->load->view('layout/footer');
 	}
 
+	public function add(){
+
+		$data = array(
+			'titulo' => 'Cadastrar usuário'
+		); 
+
+		$this->form_validation->set_rules('first_name', 'name', 'trim|required');
+		$this->form_validation->set_rules('last_name', 'last name', 'trim|required');
+		$this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('username', 'username', 'trim|required|is_unique[users.username]');
+		$this->form_validation->set_rules('password', 'password', 'required|min_length[5]|max_length[255]');
+		$this->form_validation->set_rules('confirm_password', 'confirm password', 'matches[password]');
+
+		if($this->form_validation->run()){
+
+			$insert = array(
+				'first_name' => $this->input->post('first_name'),
+				'last_name' => $this->input->post('last_name'),
+				'active' => $this->input->post('active'),
+				'username' => $this->input->post('username'),
+				'password' => $this->input->post('password'),
+				'email' => $this->input->post('email')
+			);
+
+			$group = array($this->input->post('perfil_usuario'));
+			$group = $this->security->xss_clean($group);
+
+			$insert = $this->security->xss_clean($insert);
+
+			$this->db->insert('users',$insert);
+			redirect('usuarios');
+
+		}else{
+
+			$data = array(
+				'titulo' => 'Cadastrar usuário'
+			); 
+
+			$this->load->view('layout/header', $data);
+			$this->load->view('usuarios/add');
+			$this->load->view('layout/footer');
+
+		}
+
+	}
+
 	public function edit($usuario_id = NULL){
 
 		$db1 = $this->db;

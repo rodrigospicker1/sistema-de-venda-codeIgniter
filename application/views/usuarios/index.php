@@ -18,7 +18,7 @@
                       </ol>
                     </nav>
 
-                    <?php if($message = $this->session->set_flashdata('sucesso')){ ?>
+                    <?php if($message = $this->session->flashdata('sucesso')){ ?>
 
                         <div class="row">
                             <div class="col-md-12">
@@ -45,6 +45,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Usuário</th>
+                                            <th>Perfil</th>
                                             <th>Login</th>
                                             <th class="text-center">Ativo</th>
                                             <th class="no-sort" >Ações</th>
@@ -53,13 +54,20 @@
                                     <tbody>
                                         <?php foreach($usuarios as $user){ ?>
                                         <tr>
-                                            <td><?= $user->id ?></td>
-                                            <td><?= $user->username ?></td>
-                                            <td><?= $user->email ?></td>
-                                            <td class="text-center"><?php if($user->active == 1){echo('<span class="badge-primary btn-sm">Sim</span>');}else{echo('<span class="badge-primary btn-sm">Não</span>');} ?></td>
+                                            <td><?= $user['id'] ?></td>
+                                            <td><?= $user['username'] ?></td>
+                                            <?php foreach($groups as $group){ 
+
+                                                if($group['user_id'] == $user['id']){ 
+
+                                                    if($group['group_id'] == 1){ ?> <td>Adimistrador</td> <?php }
+                                                    else{?> <td>Vendedor</td> <?php }
+                                            }} ?>
+                                            <td><?= $user['email'] ?></td>
+                                            <td class="text-center"><?php if($user['active'] == 1){echo('<span class="badge-primary btn-sm">Sim</span>');}else{echo('<span class="badge-primary btn-sm">Não</span>');} ?></td>
                                             <td>
-                                                <a title="Editar" href="<?= base_url('usuarios/edit/'.$user->id) ?>" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
-                                                <a title="Excluir" href="" class="btn btn-sm btn-danger"><i class="fas fa-user-times"></i></a>
+                                                <a title="Editar" href="<?= base_url('usuarios/edit/'.$user['id']) ?>" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
+                                                <a title="Excluir" href="<?= base_url('usuarios/del/'.$user['id']) ?>" class="btn btn-sm btn-danger"><i class="fas fa-user-times"></i></a>
                                             </td>
                                         </tr>
                                         <?php } ?>

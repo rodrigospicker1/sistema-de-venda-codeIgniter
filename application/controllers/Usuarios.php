@@ -10,6 +10,21 @@ class Usuarios extends CI_Controller {
 
 	public function index()
 	{
+		// $db1 = $this->db;
+		// $db2 = $this->db;
+
+		// $this->db->select('*');
+        // $this->db->from('users');
+        // $this->db->where('users.id = '.$usuario_id.'');
+
+		// $query1 = $this->db->get();
+
+		// $db1->select('*');
+        // $db1->from('users_groups');
+        // $db1->where('users_groups.user_id = '.$usuario_id.'');
+
+        // $query2 = $db1->get();
+
 		$data = array(
 
 			'titulo' => 'Usuários cadastrados',
@@ -23,11 +38,12 @@ class Usuarios extends CI_Controller {
 				'vendor/datatables/app.js'
 			),
 
-			'usuarios' => $this->db->get("users")->result()
+			'usuarios' => $this->db->get("users")->result_array(),
+			'groups' => $this->db->get("users_groups")->result_array()
 		);
 
 		$this->load->view('layout/header', $data);
-		$this->load->view('usuarios/index');
+		$this->load->view('usuarios/index', $data);
 		$this->load->view('layout/footer');
 	}
 
@@ -46,7 +62,7 @@ class Usuarios extends CI_Controller {
 
 		if($this->form_validation->run()){
 
-			$insert = array(
+			$insert_user = array(
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'active' => $this->input->post('active'),
@@ -58,9 +74,24 @@ class Usuarios extends CI_Controller {
 			$group = array($this->input->post('perfil_usuario'));
 			$group = $this->security->xss_clean($group);
 
-			$insert = $this->security->xss_clean($insert);
+			$insert_user = $this->security->xss_clean($insert_user);
 
-			$this->db->insert('users',$insert);
+			$this->db->insert('users',$insert_user);
+
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('username', $insert_user['username']);
+			$query1 = $this->db->get();
+			$result1 = $query1->row_array();
+
+			$insert_group = array(
+				'user_id' => $result1['id'],
+				'group_id' => $this->input->post('perfil_usuario')
+			);
+
+			$this->db->insert('users_groups',$insert_group);
+
+			$this->session->set_flashdata('sucesso', 'Usuário inserido com sucesso');
 			redirect('usuarios');
 
 		}else{
@@ -154,6 +185,36 @@ class Usuarios extends CI_Controller {
 				$this->load->view('layout/footer');
 
 			}
+		}
+
+	}
+
+	public function del($usuario_id = NULL){
+
+		$db1 = $this->db;
+		$db2 = $this->db;
+
+		$this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('id', $usuario_id);
+
+		$query1 = $this->db->get();
+
+		$db1->select('*');
+        $db1->from('users_groups');
+        $db1->where('user_id', $usuario_id);
+
+        $query2 = $db1->get();
+        $result2 = $query2->row_array();
+
+		if(!$usuario_id || !$query1->row_array()){
+			$this->session->set_flashdata('error', 'Usuário não encontrado');
+			redirect('usuarios');
+		}
+
+		if($result2['group_id'] == 1){
+			$this->session->set_flashdata('error', 'O adminstrador não pode ser excluído');
+			redirect('usuarios');
 		}
 
 	}

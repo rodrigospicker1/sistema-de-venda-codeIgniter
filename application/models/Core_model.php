@@ -67,7 +67,7 @@ class Core_model extends CI_Model{
 
 	}
 
-	public function delete($abela = NULL, $condicao = NULL){
+	public function delete($tabela = NULL, $condicao = NULL){
 
 		$this->db->db_debug = FALSE;
 

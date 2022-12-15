@@ -18,12 +18,25 @@
                       </ol>
                     </nav>
 
-                    <?php if($message = $this->session->flashdata('sucesso')){ ?>
+                    <?php if($message_success = $this->session->flashdata('sucesso')){ ?>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <strong><i class="fas fa-smile-wink"></i>&nbsp;&nbsp;<?= $message; ?></strong>
+                                  <strong><i class="fas fa-smile-wink"></i>&nbsp;&nbsp;<?= $message_success; ?></strong>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php }else if($message_error = $this->session->flashdata('error')){ ?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong><?= $message_error; ?></strong>
                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>

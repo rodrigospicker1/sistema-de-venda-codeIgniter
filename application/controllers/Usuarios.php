@@ -199,6 +199,7 @@ class Usuarios extends CI_Controller {
         $this->db->where('id', $usuario_id);
 
 		$query1 = $this->db->get();
+		$result1 = $query1->row_array();
 
 		$db1->select('*');
         $db1->from('users_groups');
@@ -207,13 +208,24 @@ class Usuarios extends CI_Controller {
         $query2 = $db1->get();
         $result2 = $query2->row_array();
 
-		if(!$usuario_id || !$query1->row_array()){
+        // print_r($result2['group_id']);
+        // exit();
+
+		if(!$usuario_id || !$result1){
 			$this->session->set_flashdata('error', 'Usuário não encontrado');
 			redirect('usuarios');
 		}
 
 		if($result2['group_id'] == 1){
 			$this->session->set_flashdata('error', 'O adminstrador não pode ser excluído');
+			redirect('usuarios');
+		}
+
+		if($this->db->delete('users', $result1)){
+			$this->session->set_flashdata('sucesso', 'Usuario excluído com sucesso');
+			redirect('usuarios');
+		}else{
+			$this->session->set_flashdata('error', 'Erro ao excluir');
 			redirect('usuarios');
 		}
 

@@ -80,9 +80,30 @@
                                             <td class="text-center"><?php if($user['active'] == 1){echo('<span class="badge-primary btn-sm">Sim</span>');}else{echo('<span class="badge-primary btn-sm">Não</span>');} ?></td>
                                             <td>
                                                 <a title="Editar" href="<?= base_url('usuarios/edit/'.$user['id']) ?>" class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
-                                                <a title="Excluir" href="<?= base_url('usuarios/del/'.$user['id']) ?>" class="btn btn-sm btn-danger"><i class="fas fa-user-times"></i></a>
+                                                <a title="Excluir" href="javascript(void)" data-toggle="modal" data-target="#user-<?= $user['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-user-times"></i></a>
                                             </td>
                                         </tr>
+
+                                        <!-- MODAL -->
+                                        <div class="modal fade" id="user-<?= $user['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Deletar administrador?</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">Para excluir o registro clique em <strong>"Sim"</strong></div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Não</button>
+                                                        <a class="btn btn-danger btn-sm" href="<?= base_url('usuarios/del/'.$user['id']); ?>">Sim</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <?php } ?>
                                     </tbody>
                                 </table>

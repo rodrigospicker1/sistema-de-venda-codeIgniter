@@ -67,7 +67,6 @@ class Usuarios extends CI_Controller {
 				'last_name' => $this->input->post('last_name'),
 				'active' => $this->input->post('active'),
 				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
 				'email' => $this->input->post('email')
 			);
 
@@ -75,6 +74,8 @@ class Usuarios extends CI_Controller {
 			$group = $this->security->xss_clean($group);
 
 			$insert_user = $this->security->xss_clean($insert_user);
+			$insert_user['password'] = $this->input->post('password');
+			$insert_user['password'] = md5($insert_user['password']);
 
 			$this->db->insert('users',$insert_user);
 

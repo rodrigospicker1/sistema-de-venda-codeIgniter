@@ -9,6 +9,10 @@ class Login extends CI_Controller {
 
 	public function index(){
 
+		if($this->session->flashdata('out')){
+			redirect('usuarios/add/2');
+		}
+
 		$data = array(
 			'titulo' => 'Login'
 		);
@@ -35,6 +39,7 @@ class Login extends CI_Controller {
 
 		if($result1 != null){
 
+			$this->session->set_userdata('in', 'Logado');
 			redirect('home');
 
 		}else{
@@ -47,6 +52,7 @@ class Login extends CI_Controller {
 
 	public function logout(){
 
+		$this->session->set_userdata('out', 'Sessão finalizada');
 		redirect('login');
 
 	}

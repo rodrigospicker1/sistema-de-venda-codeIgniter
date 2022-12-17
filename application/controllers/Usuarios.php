@@ -6,10 +6,18 @@ class Usuarios extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->_table_ = 'users';
+
+		if($this->session->userdata('out')){
+			redirect('login');
+		}
 	}
 
 	public function index()
 	{
+		if($this->session->flashdata('out')){
+			redirect('login');
+		}
+
 		// $db1 = $this->db;
 		// $db2 = $this->db;
 
@@ -48,6 +56,10 @@ class Usuarios extends CI_Controller {
 	}
 
 	public function add(){
+
+		if($this->session->flashdata('out')){
+			redirect('login');
+		}
 
 		$data = array(
 			'titulo' => 'Cadastrar usuário'

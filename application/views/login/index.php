@@ -31,7 +31,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Seja bem-vindo!</h1>
                                     </div>
-                                    <form class="user" action="<?php echo base_url('login/login') ?>" name="form_index" method="POST">
+                                    <form class="user" action="<?php echo base_url('login/login') ?>" name="form_login" method="POST">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 placeholder="Email...">

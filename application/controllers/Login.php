@@ -9,7 +9,11 @@ class Login extends CI_Controller {
 
 	public function index(){
 
-		$this->load->view('layout/header');
+		$data = array(
+			'titulo' => 'Login'
+		);
+
+		$this->load->view('layout/header', $data);
 		$this->load->view('login/index');
 		$this->load->view('layout/footer');
 
@@ -30,13 +34,21 @@ class Login extends CI_Controller {
 		$result1 = $query1->row_array();
 
 		if($result1 != null){
+
 			redirect('home');
+
 		}else{
 			
 			$this->session->set_flashdata('error', 'Verifique seu e-mail ou senha');
-
 			redirect('login');
 		}
 		
 	}
+
+	public function logout(){
+
+		redirect('login');
+
+	}
+
 }

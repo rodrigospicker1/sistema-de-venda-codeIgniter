@@ -7,7 +7,9 @@ class Home extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 
-		if(!$this->session->userdata('out')){
+		$user_data = $this->session->userdata('login');
+
+		if($user_data == 'out'){
 			redirect('login');
 		}
 	}

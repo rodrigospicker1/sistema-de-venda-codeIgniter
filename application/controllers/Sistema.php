@@ -5,6 +5,12 @@ class Sistema extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+
+		$user_data = $this->session->userdata('login');
+
+		if($user_data == 'out'){
+			redirect('login');
+		}
 	}
 
 	public function index()

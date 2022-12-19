@@ -7,7 +7,9 @@ class Usuarios extends CI_Controller {
 		parent::__construct();
 		$this->_table_ = 'users';
 
-		if($this->session->userdata('out')){
+		$user_data = $this->session->userdata('login');
+
+		if($user_data == 'out'){
 			redirect('login');
 		}
 	}

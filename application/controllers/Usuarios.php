@@ -16,24 +16,6 @@ class Usuarios extends CI_Controller {
 
 	public function index()
 	{
-		if($this->session->flashdata('out')){
-			redirect('login');
-		}
-
-		// $db1 = $this->db;
-		// $db2 = $this->db;
-
-		// $this->db->select('*');
-        // $this->db->from('users');
-        // $this->db->where('users.id = '.$usuario_id.'');
-
-		// $query1 = $this->db->get();
-
-		// $db1->select('*');
-        // $db1->from('users_groups');
-        // $db1->where('users_groups.user_id = '.$usuario_id.'');
-
-        // $query2 = $db1->get();
 
 		$data = array(
 

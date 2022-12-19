@@ -8,11 +8,11 @@ class Core_model extends CI_Model{
 	public function get_all($tabela = NULL, $condicao = NULL){
 
 		if($tabela){
-			if(is_array($codicao)){
+			if(is_array($condicao)){
 				$this->db->reset_query();
 				$this->db->where($condicao);
 			}
-			return $this->db->get($tabela)->result();
+			return $this->db->get($tabela)->result_array();
 		}else{
 			return FALSE;
 		}

@@ -44,32 +44,6 @@
                             </div>
                         </div>
 
-                    <?php }else if($message_out = $this->session->flashdata('out')){ ?>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  <strong><?= $message_out; ?></strong>
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php }else if($message_in = $this->session->flashdata('in')){ ?>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                  <strong><?= $message_in; ?></strong>
-                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                            </div>
-                        </div>
-
                     <?php } ?>
 
                     <!-- DataTales Example -->

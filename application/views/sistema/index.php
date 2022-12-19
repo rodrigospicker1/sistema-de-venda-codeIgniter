@@ -18,11 +18,39 @@
                       </ol>
                     </nav>
 
+                    <?php if($message_success = $this->session->flashdata('sucesso')){ ?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <strong><i class="fas fa-smile-wink"></i>&nbsp;&nbsp;<?= $message_success; ?></strong>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php }else if($message_error = $this->session->flashdata('error')){ ?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong><?= $message_error; ?></strong>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
 
-                            <form method="post" name="form_edit">
+                            <form class="user" method="post" name="form_edit">
 
                               <div class="form-group row">
                                     
@@ -47,7 +75,7 @@
                                 <div class="col-md-3">
                                     <label>Inscrição estadual</label>
                                     <input type="text" class="form-control" name="sistema_ie" placeholder="Inscrição estadual" value="<?= $sistema->sistema_ie ?>">
-                                    <?= form_error('sistema_cnpj', '<small  class="form-text text-danger">', '</small>') ?>
+                                    <?= form_error('sistema_ie', '<small  class="form-text text-danger">', '</small>') ?>
                                 </div>
 
                               </div>
@@ -119,7 +147,7 @@
                                 <div class="col-md-12">
                                     <label>Texto da ordem de serviço e venda </label>
                                     <textarea class="form-control" name="sistema_txt_ordem_servico" placeholder="Texto da ordem de serviço e venda"><?= $sistema->sistema_txt_ordem_servico ?></textarea>
-                                    <?= form_error('sistema->sistema_txt_ordem_servico', '<small  class="form-text text-danger">', '</small>') ?>
+                                    <?= form_error('sistema_txt_ordem_servico', '<small  class="form-text text-danger">', '</small>') ?>
                                 </div>
 
                               </div>

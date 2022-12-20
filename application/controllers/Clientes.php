@@ -80,9 +80,9 @@ class Clientes extends CI_Controller {
 						))			
 				);
 
-				echo '<pre>';
-				print_r($data['cliente']);
-				exit();
+				// echo '<pre>';
+				// print_r($data['cliente']['cliente_id']);
+				// exit();
 
 				$this->load->view('layout/header', $data);
 				$this->load->view('clientes/edit');

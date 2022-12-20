@@ -26,7 +26,7 @@ class Core_model extends CI_Model{
 			$this->db->where($condicao);
 			$this->db->limit(1);
 
-			return $this->db->get($tabela)->row();
+			return $this->db->get($tabela)->row_array();
 
 		}else{
 			return FALSE;

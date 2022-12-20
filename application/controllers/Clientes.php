@@ -48,25 +48,31 @@ class Clientes extends CI_Controller {
 			$this->form_validation->set_rules('cliente_nome', 'nome', 'trim|required|min_length[4]|max_length[45]');
 			$this->form_validation->set_rules('cliente_sobrenome', 'sobrenome', 'trim|required|min_length[4]|max_length[150]');
 			$this->form_validation->set_rules('cliente_data_nascimento', 'data de nascimento', 'required');
-			$this->form_validation->set_rules('cliente_cpf_cnpj', 'cpf ou cnpj', 'required|exact_length[18]');
-			$this->form_validation->set_rules('cliente_rg_ie', 'inscrição estadual', 'trim|required|max_length[20]');
-			$this->form_validation->set_rules('cliente_email', 'email', 'trim|required|max_length[50]');
-			$this->form_validation->set_rules('cliente_telefone', 'telefone', 'trim|max_length[14]');
-			$this->form_validation->set_rules('cliente_celular', 'celular', 'trim|max_length[15]');
-			$this->form_validation->set_rules('cliente_cep', 'cep', 'trim|required|exact_length[9]');
-			$this->form_validation->set_rules('cliente_endereco', 'endereço', 'trim|required|max_length[155]');
-			$this->form_validation->set_rules('cliente_numero_endereco', 'numero', 'trim|max_length[20]');
-			$this->form_validation->set_rules('cliente_bairro', 'bairro', 'trim|required|max_length[45]');
-			$this->form_validation->set_rules('cliente_complemento', 'complemento', 'trim|max_length[145]');
-			$this->form_validation->set_rules('cliente_cidade', 'cidade', 'trim|required|max_length[50]');
-			$this->form_validation->set_rules('cliente_estado', 'estado', 'trim|required|max_length[2]');
-			$this->form_validation->set_rules('cliente_obs', 'observações', 'max_length[500]');
+
+			$cliente_tipo = $this->input->post('cliente_tipo');
+
+			// if($cliente_tipo == 1){
+			// 	$this->form_validation->set_rules('cliente_cpf', 'cpf', 'required|max_length[18]|callback_valida_cpf');
+			// }else{
+			// 	$this->form_validation->set_rules('cliente_cnpj', 'cnpj', 'required|max_length[18]|callback_valida_cnpj');
+			// }
+
+			$this->form_validation->set_rules('cliente_rg_ie', 'inscrição estadual', 'trim|required|max_length[20]|callback_check_rg_ie');
+			$this->form_validation->set_rules('cliente_email', 'email', 'trim|required|max_length[50]|callback_check_email');
+			// $this->form_validation->set_rules('cliente_telefone', 'telefone', 'trim|max_length[14]');
+			// $this->form_validation->set_rules('cliente_celular', 'celular', 'trim|max_length[15]');
+			// $this->form_validation->set_rules('cliente_cep', 'cep', 'trim|required|exact_length[9]');
+			// $this->form_validation->set_rules('cliente_endereco', 'endereço', 'trim|required|max_length[155]');
+			// $this->form_validation->set_rules('cliente_numero_endereco', 'numero', 'trim|max_length[20]');
+			// $this->form_validation->set_rules('cliente_bairro', 'bairro', 'trim|required|max_length[45]');
+			// $this->form_validation->set_rules('cliente_complemento', 'complemento', 'trim|max_length[145]');
+			// $this->form_validation->set_rules('cliente_cidade', 'cidade', 'trim|required|max_length[50]');
+			// $this->form_validation->set_rules('cliente_estado', 'estado', 'trim|required|max_length[2]');
+			// $this->form_validation->set_rules('cliente_obs', 'observações', 'max_length[500]');
 
 			if($this->form_validation->run()){
 
-				echo '<pre>';
-				print_r($this->input->post());
-				exit();
+				exit('validado');
 
 			}else{
 
@@ -90,6 +96,32 @@ class Clientes extends CI_Controller {
 
 			}
 
+		}
+
+	}
+
+	public function check_rg_ie($cliente_rg_ie){
+
+		$cliente_id = $this->input->post('cliente_id');
+
+		if($this->core_model->get_by_id('clientes', array('cliente_rg_ie' => $cliente_rg_ie, 'cliente_id !=' => $cliente_id))){
+			$this->form_validation->set_message('check_rg_ie', 'Esse documento já existe');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+
+	}
+
+	public function check_email($cliente_email){
+
+		$cliente_id = $this->input->post('cliente_id');
+
+		if($this->core_model->get_by_id('clientes', array('cliente_email' => $cliente_email, 'cliente_id !=' => $cliente_id))){
+			$this->form_validation->set_message('check_email', 'Esse e-mail já existe');
+			return FALSE;
+		}else{
+			return TRUE;
 		}
 
 	}
